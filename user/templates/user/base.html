@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'user/_head.html' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user/css/base.css' %}">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+    {% block more_head %}{% endblock %}
+</head>
+<body>
+    <div class="top">
+        <div class="logo-box">
+            <img src="{% static 'user/imgs/university-logo.png' %}" alt="加载中...">
+            <img src="{% static 'user/imgs/ems-logo.png' %}" alt="加载中...">
+        </div>
+    </div>
+    <div class="content">
+        <div class="left">
+            <img src="{% static 'user/imgs/left.png' %}" alt="加载中...">
+        </div>
+        <div class="right">
+            <div class="main-box panel panel-primary">
+                {% block main %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <div class="foot"></div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+.filter-form {
+    margin-top: 20px;
+    margin-bottom: 60px;
+    overflow: hidden;
+}
+.term-filter {
+    float: left;
+}
+
+.subject-filter {
+    float: left;
+    margin-left: 20px;
+}
+
+.filter-form input {
+    margin-left: 20px;
+}
+
+.grade-table td input {
+    border: 0;
+    outline: none;
+    width: 50px;
+    text-align: center;
+}
+.btn-submit {
+    width: 100%;
+}
+
+.error_message {
+    margin-bottom: 40px;
+}

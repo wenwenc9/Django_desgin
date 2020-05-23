@@ -1,0 +1,39 @@
+{% extends 'bbs/base.html' %}
+
+{% block title %}
+    文章浏览
+{% endblock %}
+
+{% block more_head %}
+    {% load static %}
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-info">
+        <div class="panel-heading"><h1>文章浏览</h1></div>
+        <div class="panel-body">
+            <ul class="article-list" id="articles">
+                {% for article in articles %}
+                    <li>
+                        <a href="{% url 'bbs:detail' id=article.id %}">{{ article.title }}</a>
+                        <span>{{ article.publish_time }}</span><span>{{ article.author.username }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <nav style="margin-left: 20px">
+                <ul class="pagination">
+                    {% for i in pageRange %}
+                        {% if current_num == i %}
+                            <li class="active"><a href="{% url 'bbs:article' page=i %}">{{ i }}</a></li>
+                        {% else %}
+                            <li><a href="{% url 'bbs:article' page=i %}">{{ i }}</a></li>
+                        {% endif %}
+
+
+                    {% endfor %}
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+{% endblock %}

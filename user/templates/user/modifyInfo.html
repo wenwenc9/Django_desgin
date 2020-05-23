@@ -1,0 +1,29 @@
+{% extends 'user/base.html' %}
+{% block title %}
+    修改信息
+{% endblock %}
+{% block more_head %}
+    {% load static %}
+{% endblock %}
+{% block main %}
+    <div class="panel-heading">
+        <div class="panel-title">修改信息/MODIFY</div>
+    </div>
+    <div class="panel-body">
+        <form action="{% url "user:modify" item='info' %} " method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  用户名
+                <input class="form-control" type="text" id="username" name="username" placeholder="{{ current_user.username }}"
+                       required="required">
+            </div>
+            <input type="submit" value="确认修改" class="btn btn-primary">
+            <a class="btn btn-primary" href="{% url 'user:index' %}" style="margin-left: 30px">返回首页</a>
+        </form>
+        {% if error_message %}
+            <p class="error_message">{{ error_message }}</p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{#用戶登錄後進去的修改#}

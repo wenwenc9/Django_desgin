@@ -1,0 +1,44 @@
+.top {
+    background: white url("../imgs/top-background.png") no-repeat;
+}
+
+
+.logo-box {
+    margin-left: 100px;
+}
+.logo-box img {
+    width: 20%;
+}
+.content {
+    margin-top: 30px;
+    background: #e4e4e4;
+    overflow: hidden;
+}
+
+.left{
+    float: left;
+}
+.left img {
+    width: 100%;
+    margin-left: 30%;
+}
+
+.right {
+    float: right;
+    margin-right: 15%;
+    width: 30%;
+}
+
+.error_message {
+    text-align: center;
+    color: red;
+    margin-top: 20px;
+}
+
+.captcha-img {
+    float: right;
+    width: auto;
+    cursor: pointer;
+    height: 34px;
+}
+

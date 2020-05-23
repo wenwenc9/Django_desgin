@@ -1,0 +1,51 @@
+{% extends 'bbs/base.html' %}
+
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+{% block more_head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bbs/css/detail.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="article-container">
+        <h2>{{ article.title }}</h2>
+        <p class="article-info-group">
+            <span>发表时间：{{ article.publish_time }}</span>
+            <span>作者：{{ article.author.username }}</span>
+        </p>
+        <article class="article-content" id="article-content" data-id="{{ article.id }}">
+            {{ article.content|safe }}
+        </article>
+    </div>
+    <div class="comment-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">评论列表</div>
+        <ul class="list-group">
+            {% for comment in comments %}
+                <li class="list-group-item">
+                    <p class="comment-info">
+                        <span>{{ comment.author.username }}</span>
+                        <span>{{ comment.publish_time }}</span>
+                    </p>
+                    <p class="comment-content">
+                        <span>{{ comment.content | safe }}</span>
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    </div>
+    <div class="add-comment-group">
+        <h3>发表评论</h3>
+        <form action="{% url 'bbs:comment' id=article.id %}" method="post">
+            {% csrf_token %}
+            <textarea class="form-control" name="commentContent" rows="3"></textarea>
+            <input type="submit" value="发表评论" class="comment-submit">
+        </form>
+
+    </div>
+
+{% endblock %}

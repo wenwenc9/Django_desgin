@@ -1,0 +1,55 @@
+.top {
+    background: white url("../imgs/top-background.png") no-repeat;
+    overflow: hidden;
+}
+
+.logo-box {
+    margin-left: 100px;
+    float: left;
+    width: 80%;
+}
+
+.logo-box img {
+    width: 20%;
+}
+
+.operation-box {
+    float: right;
+    margin-right: 100px;
+}
+.operation-box span {
+    padding-top: 30px;
+    margin-left: 20px;
+}
+
+.content {
+    margin-top: 30px;
+    background: #e4e4e4;
+    overflow: hidden;
+}
+
+.left{
+    float: left;
+    margin-left: 2%;
+    width: 15%;
+}
+
+.list-group {
+    width: 200px;
+}
+
+.right {
+    float: right;
+    width: 80%;
+}
+
+.mid {
+    margin-top: 30px;
+}
+
+.error_message {
+    text-align: center;
+    color: red;
+    margin-top: 20px;
+}
+

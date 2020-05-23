@@ -1,0 +1,5 @@
+# 一些命名，省的自己打了
+CURRENT_USER_ID = 'CURRENT_USER_ID'
+CURRENT_USER = 'CURRENT_USER'
+CAPTCHA_TEXT = 'captcha_text'
+DEFAULT_SERVER_ERROR_MESSAGE = '遇到意外错误，请重启或联系管理员！'

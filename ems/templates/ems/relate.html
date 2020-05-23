@@ -1,0 +1,108 @@
+{% extends 'ems/base.html' %}
+
+{% block title %}
+    {% if current_user.role.name == '教师' %}
+        关联工号
+    {% else %}
+        关联学号
+    {% endif %}
+{% endblock %}
+
+{% block more_head %}
+    {% load static %}
+    <style>
+        form {
+            margin-top: 40px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-info">
+        {% if current_user.role.name == '教师' %}
+        <div class="panel-heading"><h1>关联工号</h1></div>
+        <div class="panel-body">
+            {% if current_user.teacher %}
+                <h3>你已绑定至如下信息，如需解绑，请联系管理员</h3>
+                <form>
+                    <div class="form-group">
+                        <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>  工号
+                        <input class="form-control" type="text" value="{{ current_user.teacher.t_id }}"
+                               readonly="readonly">
+                    </div>
+                    <div class="form-group">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  姓名
+                        <input class="form-control" type="text" value="{{ current_user.teacher.real_name }}"
+                               readonly="readonly">
+                    </div>
+                    <div class="form-group">
+                        <span class="glyphicon glyphicon-random" aria-hidden="true"></span>  性别
+                        <input class="form-control" type="text" value="{{ current_user.teacher.get_gender_display }}"
+                               readonly="readonly">
+                    </div>
+                </form>
+            {% else %}
+                <form action="{% url "ems:relate" %} " method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>  工号
+                        <input class="form-control" type="text" id="id" name="id" placeholder="请输入工号"
+                               required="required">
+                    </div>
+                    <div class="form-group">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>  校园卡密码
+                        <input class="form-control" type="password" id="password" name="password"
+                               placeholder="请输入校园卡密码" required="required">
+                    </div>
+                    <input type="submit" value="确认绑定" class="btn btn-primary">
+                </form>
+                {% if error_message %}
+                    <p class="error_message">{{ error_message }}</p>
+                {% endif %}
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="panel-heading"><h1>关联学号</h1></div>
+        <div class="panel-body">
+            {% if current_user.student %}
+                <h3>你已绑定至如下信息，如需解绑，请联系管理员</h3>
+                <form>
+                    <div class="form-group">
+                        <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>  学号
+                        <input class="form-control" type="text" value="{{ current_user.student.s_id }}"
+                               readonly="readonly">
+                    </div>
+                    <div class="form-group">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  姓名
+                        <input class="form-control" type="text" value="{{ current_user.student.real_name }}"
+                               readonly="readonly">
+                    </div>
+                    <div class="form-group">
+                        <span class="glyphicon glyphicon-random" aria-hidden="true"></span>  性别
+                        <input class="form-control" type="text" value="{{ current_user.student.get_gender_display }}"
+                               readonly="readonly">
+                    </div>
+                </form>
+            {% else %}
+                <form action="{% url "ems:relate" %} " method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  学号
+                        <input class="form-control" type="text" id="id" name="id" placeholder="请输入学号"
+                               required="required">
+                    </div>
+                    <div class="form-group">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>  校园卡密码
+                        <input class="form-control" type="password" id="password" name="password"
+                               placeholder="请输入校园卡密码" required="required">
+                    </div>
+                    <input type="submit" value="确认绑定" class="btn btn-primary">
+                </form>
+                {% if error_message %}
+                    <p class="error_message">{{ error_message }}</p>
+                {% endif %}
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

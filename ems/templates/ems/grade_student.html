@@ -1,0 +1,67 @@
+{% extends 'ems/base.html' %}
+
+{% block title %}
+    成绩查询
+{% endblock %}
+
+{% block more_head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ems/css/grade.css' %}">
+    <script src="{% static 'ems/js/grade.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-info">
+        <div class="panel-heading"><h1>成绩查询</h1></div>
+        <div class="panel-body">
+            <div class="filter-box">
+                <div class="input-group">
+                    <span>查询条件：</span>
+                    <form class="filter-form" action="{% url 'ems:grade_student' %}" method="get">
+                        <div class="input-group term-filter">
+                            <span class="input-group-addon" id="term-addon">学期：</span>
+                            <select class="form-control" aria-describedby="term-addon" name="term">
+                                <option value="">全部</option>
+                                {% for term in terms %}
+                                    <option value="{{ term.id }}">{{ term.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="input-group subject-filter">
+                            <span class="input-group-addon" id="subject-addon">课程：</span>
+                            <select class="form-control" aria-describedby="subject-addon" name="subject">
+                                <option value="">全部</option>
+                                {% for subject in subjects %}
+                                    <option value="{{ subject.id }}">{{ subject.id }} {{ subject.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input type="submit" value="提交查询" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
+            <div class="grade-table">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>学号</th>
+                        {% for grade in grades %}
+                            <th>{{ grade.subject.name }}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ student.real_name }}</td>
+                            <td>{{ student.s_id }}</td>
+                            {% for grade in grades %}
+                            <td>{{ grade.point }}</td>
+                            {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

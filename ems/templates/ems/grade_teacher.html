@@ -1,0 +1,49 @@
+{% extends 'ems/base.html' %}
+
+{% block title %}
+    成绩录入
+{% endblock %}
+
+{% block more_head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ems/css/grade.css' %}">
+    <script src="{% static 'ems/js/grade.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-info">
+        <div class="panel-heading"><h1>成绩录入</h1></div>
+        <div class="panel-body">
+        {% if error_message %}
+        <p class="error_message">{{ error_message }}</p>
+        {% endif %}
+            <form action="{% url 'ems:grade_teacher' subject_id=subject.id %}" method="post">
+            {% csrf_token %}
+                <div class="grade-table">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>学号</th>
+                        <th>分数</th>
+                        <th>课程</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for student in students %}
+                        <tr>
+                            <td>{{ student.real_name }}</td>
+                            <td>{{ student.s_id }}</td>
+                            <td><input type="text" name="point" value="{{ student.grade.point }}"></td>
+                            <td>{{ subject.name }}</td>
+                            <input type="hidden" value="{{ student.grade.id }}" name="grade">
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+                <input type="submit" value="提交成绩" class="btn btn-default">
+            </form>
+        </div>
+    </div>
+{% endblock %}

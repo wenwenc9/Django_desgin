@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "bbs/_head.html" %}
+    {% load static %}
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bbs/css/base.css' %}">
+    {% block more_head %}{% endblock %}
+</head>
+<body>
+    <div class="top">
+        <div class="logo-box">
+            <img src="{% static 'bbs/imgs/university-logo.png' %}" alt="加载中...">
+            <img src="{% static 'bbs/imgs/ems-logo.png' %}" alt="加载中...">
+        </div>
+        <div class="operation-box">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <a href="{% url 'ems:index' %}">{{ current_user }}</a>
+            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+            <a href="{% url 'user:logout' %}">注销</a>
+        </div>
+    </div>
+    <div class="mid">
+        <div class="left">
+            <div class="list-group">
+                <a href="{% url 'ems:index' %}" class="list-group-item" style="margin-bottom: 20px">首页</a>
+                <li class="list-group-item list-group-item-success">
+                    个人中心
+                </li>
+                <a href="{% url 'user:modify' item='info' %}" class="list-group-item">修改信息</a>
+                <a href="{% url 'user:modify' item='password' %}" class="list-group-item">修改密码</a>
+            </div>
+            <div class="list-group">
+                <li class="list-group-item list-group-item-success">
+                    教务中心
+                </li>
+                {% if current_user.role.name == '教师' %}
+                <a href="{% url 'ems:relate' %}" class="list-group-item">关联工号</a>
+                <a href="{% url 'ems:subject_teacher' %}" class="list-group-item">录入成绩</a>
+                {% else %}
+                <a href="{% url 'ems:relate' %}" class="list-group-item">关联学号</a>
+                <a href="{% url 'ems:grade_student' %}" class="list-group-item">查询成绩</a>
+                {% endif %}
+            </div>
+            <div class="list-group">
+                <li class="list-group-item list-group-item-success">
+                    互动中心
+                </li>
+                <a href="{% url 'bbs:publish' %}" class="list-group-item">发表文章</a>
+                <a href="{% url 'bbs:article' page=1 %}" class="list-group-item">浏览文章</a>
+            </div>
+        </div>
+        <div class="right">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

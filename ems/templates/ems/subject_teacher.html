@@ -1,0 +1,34 @@
+{% extends 'ems/base.html' %}
+
+{% block title %}
+    课程选择
+{% endblock %}
+
+{% block more_head %}
+    {% load static %}
+    <style>
+        .subject-list {
+            width: 500px;
+        }
+        .subject-list li {
+            margin-left: 20px;
+            font-size: 18px;
+            width: 100%;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-info">
+        <div class="panel-heading"><h1>课程选择</h1></div>
+        <div class="panel-body">
+            <ul class="list-group subject-list">
+                {% for subject in subjects %}
+                <li class="list-group-item">
+                    <a href="{% url 'ems:grade_teacher' subject_id=subject.id%}">{{ subject.id }}  {{ subject.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

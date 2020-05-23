@@ -1,0 +1,43 @@
+{% extends 'user/base.html' %}
+{% block title %}
+    登录
+{% endblock %}
+{% block more_head %}
+    {% load static %}
+    <script src="{% static 'user/js/login.js' %}"></script>
+{% endblock %}
+{% block main %}
+    <div class="panel-heading">
+        <div class="panel-title">用户登录/LOGIN</div>
+    </div>
+    <div class="panel-body">
+        <form action="{% url "user:login" %} " method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  用户名
+                <input class="form-control" type="text" id="username" name="username" placeholder="请输入用户名"
+                       required="required">
+            </div>
+            <div class="form-group">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>  密码
+                <input class="form-control" type="password" id="password" name="password"
+                       placeholder="请输入密码" required="required">
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" type="text" id="captcha" name="captcha" placeholder="验证码" style="width: 60%">
+                    <span id="-captcha-btn">
+                        <img id="captcha-img" class="captcha-img" src="{% url 'user:captcha' %}" alt="加载中">
+                    </span>
+                </div>
+            </div>
+
+            <input type="submit" value="登录" class="btn btn-primary">
+            <a href="{% url "user:register" %}" class="btn btn-primary" style="margin-left: 20px">注册</a>
+            <a href="{% url "user:getPassword" %}" class="btn btn-primary" style="margin-left: 20px">忘记密码</a>
+        </form>
+        {% if error_message %}
+            <p class="error_message">{{ error_message }}</p>
+        {% endif %}
+    </div>
+{% endblock %}
